@@ -3,6 +3,7 @@ import java.awt.event.*;
 import java.awt.geom.Line2D;
 import java.awt.image.BufferedImage;
 import java.applet.*;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Vector;
 
@@ -12,10 +13,11 @@ class DrawingCanvas extends Canvas implements MouseListener, MouseMotionListener
 	int y1, y2;
 	
 	int R, G, B;
-	Vector shapes = new Vector();
+	ArrayList shapes = new ArrayList();
 	BufferedImage img;
 	
 	public DrawingCanvas(int w, int h){
+		
 		setSize(w,h);
 		setForeground(Color.gray);
 		setBackground(Color.white);
@@ -93,7 +95,7 @@ class DrawingCanvas extends Canvas implements MouseListener, MouseMotionListener
 		VecLine newLine = new VecLine(x1,y1,x2,y2);
 		newLine.setColor(new Color(R,G,B));
 		newLine.setStroke(width);
-		shapes.addElement(newLine);
+		shapes.add(newLine);
 		paint(getGraphics());
 	}
 
@@ -105,11 +107,15 @@ class DrawingCanvas extends Canvas implements MouseListener, MouseMotionListener
 	public void paint(Graphics g){
 		int number = shapes.size();
 		for (int i = 0; i < number; i++){
-			VecLine data = (VecLine) shapes.elementAt(i);
+			VecLine data = (VecLine) shapes.get(i);
 			
 			g.setColor(data.getColor());
 			Graphics2D g2 = (Graphics2D) g;
+			g2.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING,
+                    RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_VBGR);
 			g2.setStroke(new BasicStroke(data.getWidth()));
+			
+			
 			g2.drawLine(data.x1, data.y1, data.x2, data.y2);
 		}
 		

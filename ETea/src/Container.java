@@ -12,8 +12,8 @@ public class Container extends Applet implements MouseListener, MouseMotionListe
 	
 	
 	public Container(){
-		setBackground(Color.blue);
-	    DrawingCanvas myCanvas = new DrawingCanvas(800,400);
+		setBackground(Color.gray);
+	    DrawingCanvas myCanvas = new DrawingCanvas(1200,800);
 	    add(myCanvas);
 	}
 
